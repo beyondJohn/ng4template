@@ -1,16 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { UiComponent } from './ui/ui.component';
-import { AuthService } from '../app/services/auth.service';
-import { RedundantComponent } from './redundant/redundant.component';
+import { NgModule, enableProdMode } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 
+import { AppComponent } from './app.component';
+import { InfoComponent } from './info/info.component'
+
+
+enableProdMode();
 @NgModule({
   declarations: [
     AppComponent,
-    UiComponent,
-    RedundantComponent
+    InfoComponent
   ],
   imports: [
     BrowserModule
