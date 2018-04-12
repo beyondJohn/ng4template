@@ -21,7 +21,7 @@ import { ActivatedRoute } from '@angular/router';
           {optional: true}),
         // move page off screen right on leave
         query(':leave',
-          animate('4000ms ease',
+          animate('400ms ease',
             style({
               position: 'fixed',
               width: '100%',
@@ -33,7 +33,7 @@ import { ActivatedRoute } from '@angular/router';
         {optional: true}),
         // move page in screen from left to right
         query(':enter',
-          animate('4000ms ease',
+          animate('400ms ease',
             style({
               position: 'fixed',
               width: '100%',
