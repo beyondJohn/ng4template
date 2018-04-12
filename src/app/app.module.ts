@@ -1,25 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, enableProdMode } from '@angular/core';
-import { APP_BASE_HREF, CommonModule } from '@angular/common';
-import { RouterModule, Routes, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { InfoComponent } from './info/info.component';
-import { HomeComponent } from './home/home.component'
-
+import { HomeComponent } from './home/home.component';
+import { NavComponent } from './nav/nav.component';
 
 enableProdMode();
-
 const appRoutes: Routes = [
   {
     path: 'info',
     component: InfoComponent,
-    data: { title: 'Info' }
+    data: { title: 'Info', animation:'info' }
   },
   {
     path: 'home',
     component: HomeComponent,
-    data: { title: 'Home' }
+    data: { title: 'Home', animation:'home' }
   },
   {
     path: '',
@@ -30,14 +30,15 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     InfoComponent,
-    HomeComponent
+    HomeComponent,
+    NavComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     CommonModule,
     RouterModule.forRoot(appRoutes,{useHash:true})
   ],
-  // providers: [{ provide: APP_BASE_HREF, useValue: "./" }],
   providers: [],
   exports: [RouterModule],
   bootstrap: [AppComponent]

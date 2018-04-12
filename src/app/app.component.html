@@ -1,5 +1,9 @@
 <div><h1>Hello</h1></div>
-<router-outlet></router-outlet>
-<a [routerLink]="['/home']">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;<a [routerLink]="['/info']">Info</a>
+<div [@routerAnimation]="getRouteAnimation(route)">
+    <router-outlet #route="outlet"></router-outlet>
+</div>
+<div>
+<nav-component></nav-component>
+</div>
 
 
