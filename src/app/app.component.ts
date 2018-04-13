@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, animate, transition, query } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
 
@@ -47,12 +47,20 @@ import { ActivatedRoute } from '@angular/router';
     ])
   ]
 })
-export class AppComponent {
-  constructor(
-  ) { }
+export class AppComponent implements OnInit, OnDestroy {
+  constructor() { 
+
+  }
   title = 'app';
   // change the animation state
   getRouteAnimation(outlet) {
+    console.log("Outlet: ",outlet);
     return outlet.activatedRouteData.animation;
+  }
+  ngOnInit(){
+
+  }
+  ngOnDestroy(){
+
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'info-component',
@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class InfoComponent {
   title = 'info';
+  ngOnInit() {
+
+  }
+  ngOnDestroy() {
+
+  }
 }
