@@ -15,5 +15,8 @@ export class HomeComponent implements OnInit {
   ngOnDestroy() {
 
   }
+  route(){
+    console.log('clicked home');
+  }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, animate, transition, query } from '@angular/animations';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import { AuthGuard } from './services/authguard.service';
 
 @Component({
   selector: 'app-component',
@@ -47,14 +48,22 @@ import { ActivatedRoute } from '@angular/router';
     ])
   ]
 })
-export class AppComponent implements OnInit, OnDestroy {
-  constructor() { 
+export class AppComponent implements OnInit, OnDestroy, CanActivate {
+  constructor(private route: Router) { 
 
   }
+  
   title = 'app';
+  currentActivated = "";
   // change the animation state
   getRouteAnimation(outlet) {
     console.log("Outlet: ",outlet);
+    
+    try{this.currentActivated = outlet['activated']['_elDef']['element']['name'];}
+    catch(e){this.currentActivated = '';}
+    
+    console.log("CurrentActivated: ",this.currentActivated);
+   
     return outlet.activatedRouteData.animation;
   }
   ngOnInit(){
@@ -62,5 +71,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(){
 
+  }
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    let url: string = state.url;
+    console.log("canActivate");
+    return true;
   }
 }

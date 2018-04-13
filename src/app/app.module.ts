@@ -8,13 +8,22 @@ import { AppComponent } from './app.component';
 import { InfoComponent } from './info/info.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
+import { AdminComponent } from './admin/admin.component';
+
+import { AuthGuard } from './services/authguard.service';
 
 enableProdMode();
 const appRoutes: Routes = [
   {
+  path: '',
+  component: AdminComponent,
+  canActivate: [AuthGuard],
+  children: [
+  {
     path: 'info',
     component: InfoComponent,
-    data: { title: 'Info', animation:'info' }
+    data: { title: 'Info', animation:'info' },
+    canActivate: [AuthGuard]
   },
   {
     path: 'home',
@@ -25,13 +34,16 @@ const appRoutes: Routes = [
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
-  }];
+  }]
+}];
 @NgModule({
   declarations: [
     AppComponent,
     InfoComponent,
     HomeComponent,
-    NavComponent
+    NavComponent,
+    AdminComponent
+
   ],
   imports: [
     BrowserAnimationsModule,
@@ -39,7 +51,7 @@ const appRoutes: Routes = [
     CommonModule,
     RouterModule.forRoot(appRoutes,{useHash:true})
   ],
-  providers: [],
+  providers: [AuthGuard],
   exports: [RouterModule],
   bootstrap: [AppComponent]
 })
