@@ -4,13 +4,13 @@
 <div>
     <h1>My App</h1>
 </div>
-<!-- <div [@routerAnimation]="getRouteAnimation(route)"> -->
-    <router-outlet></router-outlet>
-    <!-- <router-outlet #route="outlet"></router-outlet> -->
-<!-- </div> -->
+<div [@routerAnimation]="getRouteAnimation(route)">
+    <router-outlet #route="outlet"></router-outlet>
+</div>
 
-<div class="modal" [@toggleState]="shouldToggle">
+
+<!-- <div class="modal" [@toggleState]="shouldToggle">
   Move off screen
 </div>
 
-<div (click)="remove()">Remove from Screen</div>
+<div (click)="remove()">Remove from Screen</div> -->

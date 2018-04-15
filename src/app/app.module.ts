@@ -16,11 +16,6 @@ import { AnimationService } from './services/animation.service';
 enableProdMode();
 const appRoutes: Routes = [
   {
-  path: '',
-  component: AdminComponent,
-  canActivate: [AuthGuard],
-  children: [
-  {
     path: 'info',
     component: InfoComponent,
     data: { title: 'Info', animation:'info' },
@@ -35,8 +30,8 @@ const appRoutes: Routes = [
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
-  }]
-}];
+  }];
+
 @NgModule({
   declarations: [
     AppComponent,
