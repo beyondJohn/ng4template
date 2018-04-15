@@ -8,3 +8,9 @@
     <router-outlet></router-outlet>
     <!-- <router-outlet #route="outlet"></router-outlet> -->
 <!-- </div> -->
+
+<div class="modal" [@toggleState]="shouldToggle">
+  Move off screen
+</div>
+
+<div (click)="remove()">Remove from Screen</div>

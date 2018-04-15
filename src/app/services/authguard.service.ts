@@ -3,11 +3,11 @@ import { CanActivate } from '@angular/router';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    isFinished = false;
+    isFinished = true;
     canActivate() {
-        let myReturn = false;
+        let myReturn = true;
         console.log('AuthGuard#canActivate called isFinished:', this.isFinished);
-        this.isFinished === true ? myReturn = true : myReturn = false;
+        //myReturn = this.isFinished;
         return myReturn;
     }
 }

@@ -1,1 +1,5 @@
-<div>My Info Page</div>
+<div [@toggleState]="shouldToggle" *ngIf="pleaseRemove" (@toggleState.start)="animationStarted($event)"
+(@toggleState.done)="animationDone($event)">
+    <div>My Info Page</div>
+    <div (click)="remove()">Remove Info</div>
+</div>

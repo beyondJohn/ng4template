@@ -11,6 +11,7 @@ import { NavComponent } from './nav/nav.component';
 import { AdminComponent } from './admin/admin.component';
 
 import { AuthGuard } from './services/authguard.service';
+import { AnimationService } from './services/animation.service';
 
 enableProdMode();
 const appRoutes: Routes = [
@@ -51,7 +52,7 @@ const appRoutes: Routes = [
     CommonModule,
     RouterModule.forRoot(appRoutes,{useHash:true})
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, AnimationService],
   exports: [RouterModule],
   bootstrap: [AppComponent]
 })
