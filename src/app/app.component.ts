@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { trigger, state, style, animate, transition, query } from '@angular/animations';
 import { ActivatedRoute, CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthGuard } from './services/authguard.service';
@@ -56,20 +56,16 @@ import { AnimationService } from './services/animation.service';
     ])
   ]
 })
-export class AppComponent implements OnInit, OnDestroy, CanActivate {
+export class AppComponent implements CanActivate {
   constructor(
     private route: Router,
     private _animation: AnimationService 
-  ) {
-
-  }
+  ) {}
   @Input() shouldToggle = false;
   title = 'app';
   currentActivated = "";
   // change the animation state
   getRouteAnimation(outlet) {
-    //console.log("Outlet: ", outlet);
-
     try { 
       this.currentActivated = outlet['activated']['_elDef']['element']['name']; 
       this._animation.setQues({outgoing:this.currentActivated, incoming:''});
@@ -77,21 +73,10 @@ export class AppComponent implements OnInit, OnDestroy, CanActivate {
     catch (e) { 
       this.currentActivated = ''; 
     }
-
-    //console.log("CurrentActivated: ", this.currentActivated);
-
     return outlet.activatedRouteData.animation;
-  }
-  ngOnInit() {
-
-  }
-  ngOnDestroy() {
-
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     let url: string = state.url;
-    
-    //console.log("canActivate");
     return true;
   }
   remove(){

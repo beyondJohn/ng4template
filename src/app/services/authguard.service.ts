@@ -7,7 +7,6 @@ export class AuthGuard implements CanActivate {
     canActivate() {
         let myReturn = this.isFinished;
         this.isFinished = false;
-        console.log('AuthGuard#canActivate called isFinished:', this.isFinished);
         return myReturn;
     }
 }

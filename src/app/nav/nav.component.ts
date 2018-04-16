@@ -17,60 +17,51 @@ export class NavComponent {
         private myRoute: ActivatedRoute,
         private _authguard: AuthGuard,
         private _animation: AnimationService
-    ) {
-        this._router.events.subscribe(event => this.routeEvent(event));
-    }
+    ) {}
     ngOnInit() {
         this._animation.notification.subscribe(message => this.animationChangeEvent(message));
     }
+    finished = false;
     animationChangeEvent(msg) {
 
-        if (msg['text'] === 'finished') {
-            this.home();
+        if (msg['status'] === 'finished') {
+            this.finished = true;
         }
     }
     home() {
-        try {
-            let checkQue = this._animation.inqueComponents;
-            let letTry = checkQue["incoming"];
-            if (checkQue["outgoing"].indexOf('home') === -1) {
-                checkQue["incoming"] = "app-home";
-                this._animation.inqueService.next(checkQue);
-                this._authguard.isFinished = true;
+        if (this.finished) {
+            try {
+                let checkQue = this._animation.inqueComponents;
+                let letTry = checkQue["incoming"];
+                if (checkQue["outgoing"].indexOf('home') === -1) {
+                    this.finished = false;
+                    this._animation.setNotification({ status: "inprogress" });
+                    checkQue["incoming"] = "app-home";
+                    this._animation.inqueService.next(checkQue);
+                    this._authguard.isFinished = true;
+                }
             }
-        }
-        catch (e) {
+            catch (e) {
 
+            }
         }
-    }
-    routeEvent(ev) {
-        if (ev.constructor.name === "NavigationStart") {
-            this.currentUrl = ev['url'];
-            if (this.currentUrl === '/') {
-                //console.log('NavigationStart startup url');
-            }
-            else if (this.currentUrl !== '/' && this.adder > 0) {
-                console.log("NavigationStart routing: ", ev['url']);
-            }
-            else {
-                //console.log("NavigationStart with existing url: ", ev['url'])
-            }
-            this.adder++;
-        }
-
     }
     info() {
-        try {
-            let checkQue = this._animation.inqueComponents;
-            let letTry = checkQue["incoming"];
-            if (checkQue["outgoing"].indexOf('info') === -1) {
-                checkQue["incoming"] = "app-info";
-                this._animation.inqueService.next(checkQue);
-                this._authguard.isFinished = true;
+        if (this.finished) {
+            try {
+                let checkQue = this._animation.inqueComponents;
+                let letTry = checkQue["incoming"];
+                if (checkQue["outgoing"].indexOf('info') === -1) {
+                    this.finished = false;
+                    this._animation.notification.next({ status: "inprogress" });
+                    checkQue["incoming"] = "app-info";
+                    this._animation.inqueService.next(checkQue);
+                    this._authguard.isFinished = true;
+                }
             }
-        }
-        catch (e) {
+            catch (e) {
 
+            }
         }
     }
 

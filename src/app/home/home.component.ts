@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AnimationService } from '../services/animation.service';
 import { trigger, state, style, animate, transition, query } from '@angular/animations';
 import { Router } from '@angular/router';
@@ -21,35 +21,28 @@ export class HomeComponent implements OnInit {
   constructor(
     private _router: Router,
     private _animation: AnimationService
-  ) {
-  }
+  ) {}
   ngOnInit() {
     this._animation.inqueService.subscribe(message => this.remove(message));
   }
-  ngOnDestroy() {
-    //console.log("destroy");
-  }
   remove(msg) {
-    console.log("my Home message", msg);
     try {
       if (this._animation.inqueComponents['outgoing'].split("-")[1] === "home") {
         this.shouldToggle = !this.shouldToggle;
         setTimeout(() => {
-          this.show = false;
-          let homeElement = document.getElementsByTagName("app-home");
-          homeElement[0].parentNode.removeChild(homeElement[0]);
+          try {
+            this.show = false;
+            let homeElement = document.getElementsByTagName("app-home");
+            homeElement[0].parentNode.removeChild(homeElement[0]);
+          } 
+          catch (e) {}
         }, 300);
       }
     }
-    catch (e) {
-
-    }
-
+    catch (e) {}
   }
   animationDone(ev) {
-    console.log('finished');
     this._router.navigate(['info']);
-
+    this._animation.notification.next({ status: "finished" });
   }
-
 }

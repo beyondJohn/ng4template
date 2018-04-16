@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { trigger, state, style, animate, transition, query } from '@angular/animations';
 import { AnimationService } from '../services/animation.service';
 import { Router } from '@angular/router';
@@ -19,37 +19,31 @@ export class InfoComponent {
   constructor(
     private _animation: AnimationService,
     private _router: Router
-  ) {
-
-  }
+  ) {}
   show = true;
   @Input() shouldToggle = false;
   title = 'info';
   ngOnInit() {
     this._animation.inqueService.subscribe(message => this.remove(message));
   }
-  ngOnDestroy() {
-
-  }
   remove(msg) {
-    console.log("my Info message", msg);
     try {
       if (this._animation.inqueComponents['outgoing'].split("-")[0] === "info") {
         this.shouldToggle = !this.shouldToggle;
         setTimeout(() => {
-          this.show = false;
-          let infoElement = document.getElementsByTagName("info-component");
-          infoElement[0].parentNode.removeChild(infoElement[0]);
+          try {
+            this.show = false;
+            let homeElement = document.getElementsByTagName("info-component");
+            homeElement[0].parentNode.removeChild(homeElement[0]);
+          } 
+          catch (e) {}
         }, 300);
       }
     }
-    catch (e) {
-
-    }
+    catch (e) {}
   }
-  adder = 0;
   animationDone(ev) {
-    //console.log('finished');
     this._router.navigate(['home']);
+    this._animation.notification.next({ status: "finished" });
   }
 }
