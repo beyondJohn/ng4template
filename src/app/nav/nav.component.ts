@@ -24,37 +24,54 @@ export class NavComponent {
         this._animation.notification.subscribe(message => this.animationChangeEvent(message));
     }
     animationChangeEvent(msg) {
-        
-        if(msg['text'] === 'finished'){
+
+        if (msg['text'] === 'finished') {
             this.home();
         }
     }
     home() {
+        try {
+            let checkQue = this._animation.inqueComponents;
+            let letTry = checkQue["incoming"];
+            if (checkQue["outgoing"].indexOf('home') === -1) {
+                checkQue["incoming"] = "app-home";
+                this._animation.inqueService.next(checkQue);
+                this._authguard.isFinished = true;
+            }
+        }
+        catch (e) {
 
-        console.log("clicked home");
-        this._authguard.isFinished = true;
-        this._router.navigate(['home']);
+        }
     }
     routeEvent(ev) {
         if (ev.constructor.name === "NavigationStart") {
             this.currentUrl = ev['url'];
             if (this.currentUrl === '/') {
-                console.log('NavigationStart startup url');
+                //console.log('NavigationStart startup url');
             }
             else if (this.currentUrl !== '/' && this.adder > 0) {
                 console.log("NavigationStart routing: ", ev['url']);
             }
             else {
-                console.log("NavigationStart with existing url: ", ev['url'])
+                //console.log("NavigationStart with existing url: ", ev['url'])
             }
             this.adder++;
         }
 
     }
     info() {
-        this._authguard.isFinished = false;
-        console.log("", this._authguard.isFinished);
-        this._router.navigate(['info']);
+        try {
+            let checkQue = this._animation.inqueComponents;
+            let letTry = checkQue["incoming"];
+            if (checkQue["outgoing"].indexOf('info') === -1) {
+                checkQue["incoming"] = "app-info";
+                this._animation.inqueService.next(checkQue);
+                this._authguard.isFinished = true;
+            }
+        }
+        catch (e) {
+
+        }
     }
 
     ngOnDestroy() {

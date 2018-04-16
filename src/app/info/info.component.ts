@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { trigger, state, style, animate, transition, query } from '@angular/animations';
 import { AnimationService } from '../services/animation.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'info-component',
@@ -11,43 +12,42 @@ import { AnimationService } from '../services/animation.service';
       state('true', style({ position: 'relative', width: '100%', height: '100%', opacity: 0, transform: 'translateX(100%)' })),
       state('false', style({ position: 'relative', width: '100%', height: '100%', opacity: 1, transform: 'translateX(0%)' })),
       // transition
-      transition('false => true', animate('300ms')),
+      transition('false => true', animate('300ms ease')),
     ])]
 })
 export class InfoComponent {
-  constructor(private _animation: AnimationService) {
+  constructor(
+    private _animation: AnimationService,
+    private _router: Router
+  ) {
 
   }
-  pleaseRemove = true;
+  show = true;
   @Input() shouldToggle = false;
   title = 'info';
   ngOnInit() {
-
+    this._animation.inqueService.subscribe(message => this.remove(message));
   }
   ngOnDestroy() {
 
   }
-  remove() {
-    this.shouldToggle = !this.shouldToggle;
-    setTimeout(() => {
-      this.pleaseRemove = false;
-
-    }, 300);
-  }
-  animationStarted(ev) {
-    if (!this.shouldToggle) {
-      console.log("animation started: ", ev);
+  remove(msg) {
+    console.log("my Info message", msg);
+    try {
+      if (this._animation.inqueComponents['outgoing'].split("-")[0] === "info") {
+        this.shouldToggle = !this.shouldToggle;
+        setTimeout(() => {
+          this.show = false;
+        }, 300);
+      }
     }
+    catch (e) {
 
+    }
   }
   adder = 0;
   animationDone(ev) {
-    
-    if (this.shouldToggle && this.adder === 0) {
-      console.log("animation Done!");
-      this._animation.setNotification({text:"finished"});
-      this.adder++;
-    }
-    
+    //console.log('finished');
+    this._router.navigate(['home']);
   }
 }

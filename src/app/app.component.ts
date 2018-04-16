@@ -3,6 +3,7 @@ import { trigger, state, style, animate, transition, query } from '@angular/anim
 import { ActivatedRoute, CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthGuard } from './services/authguard.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AnimationService } from './services/animation.service';
 
 @Component({
   selector: 'app-component',
@@ -56,7 +57,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ]
 })
 export class AppComponent implements OnInit, OnDestroy, CanActivate {
-  constructor(private route: Router) {
+  constructor(
+    private route: Router,
+    private _animation: AnimationService 
+  ) {
 
   }
   @Input() shouldToggle = false;
@@ -64,12 +68,17 @@ export class AppComponent implements OnInit, OnDestroy, CanActivate {
   currentActivated = "";
   // change the animation state
   getRouteAnimation(outlet) {
-    console.log("Outlet: ", outlet);
+    //console.log("Outlet: ", outlet);
 
-    try { this.currentActivated = outlet['activated']['_elDef']['element']['name']; }
-    catch (e) { this.currentActivated = ''; }
+    try { 
+      this.currentActivated = outlet['activated']['_elDef']['element']['name']; 
+      this._animation.setQues({outgoing:this.currentActivated, incoming:''});
+    }
+    catch (e) { 
+      this.currentActivated = ''; 
+    }
 
-    console.log("CurrentActivated: ", this.currentActivated);
+    //console.log("CurrentActivated: ", this.currentActivated);
 
     return outlet.activatedRouteData.animation;
   }
@@ -82,7 +91,7 @@ export class AppComponent implements OnInit, OnDestroy, CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     let url: string = state.url;
     
-    console.log("canActivate");
+    //console.log("canActivate");
     return true;
   }
   remove(){

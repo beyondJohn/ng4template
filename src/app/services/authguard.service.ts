@@ -5,9 +5,9 @@ import { CanActivate } from '@angular/router';
 export class AuthGuard implements CanActivate {
     isFinished = true;
     canActivate() {
-        let myReturn = true;
+        let myReturn = this.isFinished;
+        this.isFinished = false;
         console.log('AuthGuard#canActivate called isFinished:', this.isFinished);
-        //myReturn = this.isFinished;
         return myReturn;
     }
 }

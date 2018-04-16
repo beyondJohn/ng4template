@@ -1,4 +1,4 @@
-<div>Welcome to Home Page!!!</div>
-<a [routerLink]="['/info']" routerLinkActive="active">Go to Info</a>
-
-
+<div [@toggleState]="shouldToggle" *ngIf="show" (@toggleState.done)="animationDone($event)">
+    <div>Welcome to Home Page!!!</div>
+    <!-- <a [routerLink]="['/info']" routerLinkActive="active">Go to Info</a> -->
+</div>
