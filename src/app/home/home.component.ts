@@ -36,6 +36,8 @@ export class HomeComponent implements OnInit {
         this.shouldToggle = !this.shouldToggle;
         setTimeout(() => {
           this.show = false;
+          let homeElement = document.getElementsByTagName("app-home");
+          homeElement[0].parentNode.removeChild(homeElement[0]);
         }, 300);
       }
     }

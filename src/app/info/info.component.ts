@@ -38,6 +38,8 @@ export class InfoComponent {
         this.shouldToggle = !this.shouldToggle;
         setTimeout(() => {
           this.show = false;
+          let infoElement = document.getElementsByTagName("info-component");
+          infoElement[0].parentNode.removeChild(infoElement[0]);
         }, 300);
       }
     }
