@@ -10,8 +10,6 @@ import { AnimationService } from '../services/animation.service';
     styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
-    currentUrl = "";
-    adder = 0;
     constructor(
         private _router: Router,
         private myRoute: ActivatedRoute,
