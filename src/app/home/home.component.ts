@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css'],
   animations: [
     trigger('toggleState', [
-      state('true', style({ position: 'relative', width: '100%', height: '100%', opacity: 0, transform: 'translateX(100%)' })),
-      state('false', style({ position: 'relative', width: '100%', height: '100%', opacity: 1, transform: 'translateX(0%)' })),
+      state('true', style({ position: 'absolute', width: '100%', height: '100%', opacity: 0, transform: 'translateX(100%)' })),
+      state('false', style({ position: 'absolute', width: '100%', height: '100%', opacity: 1, transform: 'translateX(0%)' })),
       // transition
-      transition('false => true', animate('300ms ease')),
+      transition('false => true', animate('10000ms ease')),
     ])]
 })
 export class HomeComponent implements OnInit {
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
             homeElement[0].parentNode.removeChild(homeElement[0]);
           } 
           catch (e) {}
-        }, 300);
+        }, 10000);
       }
     }
     catch (e) {}

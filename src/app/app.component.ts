@@ -11,17 +11,17 @@ import { AnimationService } from './services/animation.service';
   styleUrls: ['./app.component.css'],
   animations: [
     trigger('toggleState', [
-      state('true' , style({ position: 'relative',width: '100%',height: '100%',opacity: 0,transform: 'translateX(100%)' })),
-      state('false', style({ position: 'relative',width: '100%',height: '100%',opacity: 1,transform: 'translateX(0%)' })),
+      state('true' , style({ position: 'absolute',width: '100%',height: '100%',opacity: 0,transform: 'translateX(100%)' })),
+      state('false', style({ position: 'absolute',width: '100%',height: '100%',opacity: 1,transform: 'translateX(0%)' })),
       // transition
-      transition('* => *', animate('300ms')),
+      transition('* => *', animate('10000ms')),
     ]),
     trigger('routerAnimation', [
       transition('* <=> *', [
         // Initial state of new route
         query(':enter',
           style({
-            position: 'fixed',
+            position: 'absolute',
             width: '100%',
             height: '100%',
             opacity: 0,
@@ -32,7 +32,7 @@ import { AnimationService } from './services/animation.service';
         query(':leave',
           animate('400ms ease',
             style({
-              position: 'fixed',
+              position: 'absolute',
               width: '100%',
               height: '100%',
               opacity: 0,
@@ -44,7 +44,7 @@ import { AnimationService } from './services/animation.service';
         query(':enter',
           animate('400ms ease',
             style({
-              position: 'fixed',
+              position: 'absolute',
               width: '100%',
               height: '100%',
               opacity: 1,
