@@ -79,7 +79,4 @@ export class AppComponent implements CanActivate {
     let url: string = state.url;
     return true;
   }
-  remove(){
-    this.shouldToggle = !this.shouldToggle;
-  }
 }

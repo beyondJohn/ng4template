@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AuthGuard } from '../services/authguard.service';
 import { AnimationService } from '../services/animation.service';
-
 @Component({
     selector: 'nav-component',
     templateUrl: "./nav.component.html",
